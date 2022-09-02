@@ -1,5 +1,6 @@
 // required packages
 const express = require('express')
+const axios = require('axios')
 
 // config an instance of express
 const app = express()
@@ -13,8 +14,22 @@ app.get('/', (req, res) => {
 
 app.get('/search', (req, res) => {
     // take in form data
+    // GET forms create query strings
+    console.log(req.query)
+    const url = `https://swapi.dev/api/people?search=${req.query.userInput}`
     // make an http request to the SWAPI
+    axios.get(url)
+        .then(response => {
+            // render the data to the user
+            console.log(response.data)
+            res.render('results.ejs', {
+                input: req.query.userInput,
+                people: response.data.results
+            })
+        })
+        .catch(console.error)
     // render the data to the user
+    res.json(req.query)
 })
 
 // listen on a port
