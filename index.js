@@ -8,10 +8,16 @@ app.set('view engine', 'ejs')
 
 // define some routes
 app.get('/', (req, res) => {
-    res.send('Welcome to the Star Wars search engine')
+    res.render('index.ejs')
+})
+
+app.get('/search', (req, res) => {
+    // take in form data
+    // make an http request to the SWAPI
+    // render the data to the user
 })
 
 // listen on a port
 app.listen(PORT, () => {
-    console.log(`aaaaaaarrrrrrrhhhghghghgghghgh`)
+    console.log(`aaaaaaarrrrrrrhhhghghghgghghgh ${PORT}`)
 })
